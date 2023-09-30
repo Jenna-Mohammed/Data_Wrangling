@@ -5,5 +5,20 @@ output: github_document
 
 ```{r setup}
 library(tidyverse)
+
+# tidyverse is collection of packages
 ```
+
+## Load in the FAS Litters Data
+
+```{r}
+litters_df = read_csv("./data/data/FAS_litters.csv")
+
+# we are going to update variable names to make them a bit easier
+
+litters_df = janitor::clean_names(litters_df)
+
+litters_df
+```
+
 
