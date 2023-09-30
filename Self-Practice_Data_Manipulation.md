@@ -543,3 +543,55 @@ arrange(litters_df, pups_born_alive)
 ``` r
 # arranging data frame by pups_born_alive
 ```
+
+\##`%>%` pipe operation
+
+``` r
+# what would happen if we wanted to import a dataset, then clean the names, select some variables, then mutate step, then filter
+
+litters_data_raw = read_csv("./data/data/FAS_litters.csv")
+```
+
+    ## Rows: 49 Columns: 8
+    ## -- Column specification --------------------------------------------------------
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## i Use `spec()` to retrieve the full column specification for this data.
+    ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+litters_clean_name = janitor::clean_names(litters_data_raw)
+litters_data_selected = select(litters_clean_name, -pups_survive)
+litters_mutated = mutate(litters_data_selected, wt_gain = gd18_weight - gd0_weight)
+litters_without_missing = drop_na(litters_mutated, gd0_weight)
+
+# we are going to drop anything where data is missing (above shows where gd0_weight is missing)
+```
+
+USE THE PIPE OPERATOR INSTEAD
+
+``` r
+litters_df = 
+  read_csv("./data/data/FAS_litters.csv") %>%
+  janitor::clean_names() %>%
+  select(-pups_survive) %>%
+  mutate(wt_gain = gd18_weight - gd0_weight) %>%
+  drop_na(gd0_weight)
+```
+
+    ## Rows: 49 Columns: 8
+    ## -- Column specification --------------------------------------------------------
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## i Use `spec()` to retrieve the full column specification for this data.
+    ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+# we don't need to put anything in the parantheses because the "pipe" says whatever your first argument was is going to continue (don't need to repeat)
+
+# this code chunk shows the "pipes" versio of the code chunka above to sling together a chain of commands
+```
