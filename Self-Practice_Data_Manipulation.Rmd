@@ -136,7 +136,14 @@ mutate(
 # modify the group variable by making everything lowercase and simulataneously override the group variable with a modified version
 ```
 
-```{r}
+## `arrange`
 
+arrange - goal is to put things in order
+
+```{r}
+arrange(litters_df, pups_born_alive)
+
+# arranging data frame by pups_born_alive
 ```
+
 
