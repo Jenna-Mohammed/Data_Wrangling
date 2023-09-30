@@ -123,3 +123,20 @@ filter(litters_df, group %in% c("Con7", "Mod8"))
 
 # shows where group is either of those two options -> either Con7 or Mod8, here are the rows where that shows to be true
 ```
+
+## mutate
+
+mutate will allow us to create additional values -> neither modify an existing variable or create some new variable
+
+```{r}
+mutate(
+  litters_df, wt_gain = gd18_weight - gd0_weight, 
+  group = str_to_lower(group))
+
+# modify the group variable by making everything lowercase and simulataneously override the group variable with a modified version
+```
+
+```{r}
+
+```
+
