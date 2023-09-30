@@ -21,4 +21,57 @@ litters_df = janitor::clean_names(litters_df)
 litters_df
 ```
 
+## `select`
+
+choose some columns and not others
+
+```{r}
+select(litters_df, group, litter_number)
+
+select(litters_df, group, gd0_weight)
+
+select(litters_df, group, gd0_weight:gd_of_birth)
+
+# when using select(), you first include the data you wanna use and then the columns you want to keep
+# use colon as "range"
+
+```
+
+```{r}
+select(litters_df, -litter_number)
+
+# this will get rid of only a specific column and keep everything else in data set
+
+```
+
+renaming columns
+
+```{r}
+select(litters_df, GROUP = group, LITTer_NUmber = litter_number)
+```
+```{r}
+rename(litters_df, GROUP = group, LITTer = litter_number)
+
+# can use select but rename is also an available function to use
+```
+
+select helper
+
+```{r}
+# using some additional functions - selecting columns that we know we want to keep based on some criteria.
+
+select(litters_df, starts_with("gd"))
+```
+
+```{r}
+select(litters_df, litter_number, everything())
+
+# will move litter_number from wherever it is to the beginning and keep everything else
+```
+
+```{r}
+relocate(litters_df, litter_number)
+
+# does the same thing as above; helpful to know it exists
+```
 
