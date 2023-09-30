@@ -1,0 +1,98 @@
+---
+title: "Tidy Data"
+date: September 26 2023
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+pulse_df = 
+    haven: : read_sas("data/public_pulse_data.sas"
+      janitor::clean_names() |>
+        pivot_longer(
+          bdi_score_bl: bdi_Score_12m,
+          names_to = "visit",
+          values_to "bdi" score
+    ) |>
+      mutate()
+       visit - replace(visit, visit =="bl", "00m")
+    )
+```
+
+Learning Assessment: Import/Lengthen the litters dataset 
+
+```{r}
+litters_df = 
+    read_csv(""
+    janitor::clean_names)
+    select(litter_number, gd0_weight, gd18_weight) |>
+    pivot_longer(
+      gd0_weight:gd18_weight,
+      names_to = "gd",
+      values_to = "Weight",
+      names_prefix = "gd"
+    ) |>
+      mutate(
+        gd = case_match(
+          gd,
+          "0_weight" ~0,
+          "18_weight" ~ 19,
+        )
+      )
+```
+
+## Blind Rows
+
+Import LoTR words data 
+
+```{r}
+fellowship_df = 
+    readxl::read_excel("data/loTR_Words.xlsx", range = "B3:D6") |>
+    mutate(movie = "fellowship")
+
+two_towers_df = 
+    readxl::read_excel("data/loTR_Words.xlsx", range = "F3:H6")|>
+    mutate(movie = "two towers")
+
+return_of_the_king_df = 
+    readxl::read_excel("data/loTR_Words.xlsx", range = "J3:L6")|>
+    mutate(movie = "return of the king")
+
+lotr_df = 
+    bind_rows(fellowship_df, two_towers_df, return of the king_df) |>
+    pivot_longer(
+        Male:Female,
+        names_to = "gender"
+        values_to = "Word"
+    ) |>
+    relocate(movie)
+```
+
+## Revisit FAS
+
+```{r}
+litters_df = 
+    read_csv("") |>
+    janitor::clean_names()
+    mutate(wt_gain = gd18_weight = gd-_weight) |>
+    select(litter_number, group, wt_gain)
+    seperate(group, into = c("dose", "day_of_tx"), 3)
+    
+pups_df = 
+  read_csv("")
+  janitor::clean_names() |>
+    mutate(
+      sex = case_match(
+          sex, 
+          1 ~ "male",
+          2 ~ "female"
+      )
+    )
+ 
+# fas_df |> view() into console will depice data
+```
+
