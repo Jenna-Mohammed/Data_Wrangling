@@ -8,6 +8,13 @@ library(tidyverse)
 
 # we are focusing on readr package within libraryverse
 
+library(readxl)
+
+# used to load excel documents
+
+library(haven)
+
+# used to load in SAS documents
 ```
 
 ## read in some data
@@ -28,4 +35,62 @@ litters_df
 
 ## take a look at the data 
 
+
+```{r}
+litters_df
+
+# ^ printing in console
+# everything has been changed to snake case (to clean it up)
+# tells you the amount of columns and rows (49 rows 8 columns)
+# special characters have been removed
+```
+
+```{r}
+head(litters_df)
+tail(litters_df)
+
+# ^ tail shows last few rows
+```
+
+```{r}
+skimr::skim(litters_df)
+
+# skimr:: allows us to use the function from the library without loading the library
+
+
+# view function -> running view(litters_df) allows us to interact with full dataset in new window (avoid putting it into code chunk in an R markdown document)
+```
+
+# options to read csv
+discussing additional options to the read.csv function
+```{r}
+# ?read_csv into console -> opens up help section -> check out for more information. Below are some examples
+
+litters_df = read_csv("./data/data/FAS_litters.csv", skip = 10, col_names = FALSE)
+
+# ^skipped the first 10 rows
+# ^this format is useful for when the csv provided is strangely structured (blank info in first couple rows, description is included in first few rows, )
+
+litters_df = read_csv("./data/data/FAS_litters.csv", no = c("", "NA", 999))
+
+# ^ anytime it sees any of the three things, read csv would know that this is supposed to be missing values
+
+```
+
+## Other file formats
+
+read in an excel file 
+
+```{r}
+mlb_df = read_excel("./data/data/mlb11.xlsx", range = "A1:F7")
+mlb_df
+```
+
+Read in a SAS file 
+
+```{r}
+pulse_df = read_sas("./data/data/public_pulse_data.sas7bdat")
+
+pulse_df
+```
 
