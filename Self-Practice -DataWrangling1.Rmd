@@ -1,21 +1,31 @@
 ---
-title: "Simple document"
-output: html_document
+title: "Self- Practice Data Import"
+output: github_document
 ---
 
-I'm an R Markdown document! 
+```{r setup}
+library(tidyverse)
 
-# Section 1
+# we are focusing on readr package within libraryverse
 
-Here's a **code chunk** that samples from 
-a _normal distribution_:
-
-```{r}
-samp = rnorm(100)
-length(samp)
 ```
 
-# Section 2
+## read in some data
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+we have to be very specific about where the path is (we use relative path)
+
+read in the litters dataset
+
+```{r}
+litters_df = read_csv("./data/data/FAS_litters.csv")
+
+litters_df = janitor::clean_names(litters_df)
+
+# ^ loading function from janitor function
+
+litters_df
+```
+
+## take a look at the data 
+
+
