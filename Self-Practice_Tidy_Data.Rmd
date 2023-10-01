@@ -1,0 +1,9 @@
+---
+title: "Self-Practice Tiday Data"
+output: github_document
+---
+
+```{r setup}
+library(tidyverse)
+```
+
