@@ -7,3 +7,30 @@ output: github_document
 library(tidyverse)
 ```
 
+## `pivot_longer`
+
+```{r}
+pulse_data = 
+  haven::read_sas("./data/data/public_pulse_data.sas7bdat") %>%
+  janitor::clean_names()
+
+pulse_data
+
+# we are using haven bc the data is in a SAS format
+
+```
+
+wide format to long format ...
+
+```{r}
+pulse_data_tidy = 
+  pulse_data %>%
+  pivot_longer(
+    bdi_score_bl:bdi_score_12m,
+    names_to = "visit",
+    values_to = "bdi"
+  )
+
+# ended up with a tidy dataset thats tidy in the following ways
+```
+
